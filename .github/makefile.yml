@@ -1,10 +1,20 @@
 name: Build axel
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+  release:
+    types:
+      - released
 jobs:
   build_axel:
     permissions:
       contents: write
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
     - uses: actions/checkout@v4
     - name: Set up msys2
@@ -55,7 +65,7 @@ jobs:
       
     - name: Release
       if: startsWith(github.event.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v0.1.15
+      uses: softprops/action-gh-release@v2
       with:
         #tag_name: ${{ github.ref }}
         #name: Release ${{ github.ref }}
