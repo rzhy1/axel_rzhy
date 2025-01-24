@@ -33,6 +33,7 @@ jobs:
           autoconf-archive
           libtool
           pkg-config
+          mingw-w64
           mingw-w64-x86_64-openssl
         
     - name: Build axel
