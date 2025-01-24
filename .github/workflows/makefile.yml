@@ -34,7 +34,6 @@ jobs:
           libtool
           pkg-config
           mingw-w64-x86_64-openssl
-          mingw-w64-x86_64-openssl-static
         
     - name: Build axel
       shell: msys2 {0}
