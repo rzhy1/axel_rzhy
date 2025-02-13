@@ -48,6 +48,9 @@ jobs:
 
     - name: Build axel
       run: |
+        echo "查询"
+        gcc --version
+        echo "查询结束"
         wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
         tar -zxvf axel-2.17.14.tar.gz
         cd axel-2.17.14
