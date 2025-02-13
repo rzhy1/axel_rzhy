@@ -44,7 +44,6 @@ jobs:
       shell: msys2 {0}
       run: |
         echo "查找"
-        echo $MSYSTEM
         find -type f -name "inet.h"
         echo "查找"
         export CPATH=/mingw64/include
