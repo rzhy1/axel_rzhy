@@ -42,6 +42,9 @@ jobs:
     - name: Build axel
       shell: msys2 {0}
       run: |
+        echo "查找"
+        find -type f -name inet.h
+        echo "查找"
         export CPATH=/mingw64/include
         export LIBRARY_PATH=/mingw64/lib
         wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
