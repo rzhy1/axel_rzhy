@@ -23,6 +23,7 @@ jobs:
           autoconf \
           automake \
           autoconf-archive \
+          autopoint \
           libtool \
           gettext \
           pkg-config \
