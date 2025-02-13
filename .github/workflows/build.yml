@@ -1,0 +1,70 @@
+name: Build axel on Ubuntu
+on:
+  workflow_dispatch:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+  release:
+    types: [released]
+
+jobs:
+  build_axel:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          autoconf \
+          automake \
+          autoconf-archive \
+          libtool \
+          gettext \
+          pkg-config \
+          make \
+          gcc \
+          libssl-dev \
+          wget \
+          git \
+          p7zip-full
+
+    - name: Build axel
+      run: |
+        git clone https://github.com/axel-download-accelerator/axel.git axel
+        cd axel
+        autoreconf -fvi
+        ./configure LDFLAGS="-static"
+        make
+        sudo make install
+
+    - name: Collect binaries
+      run: |
+        mkdir -p artifact
+        which axel && cp $(which axel) artifact/
+        ldd $(which axel) || true  # Static build should show "not a dynamic executable"
+
+    - name: Create 7z package
+      run: |
+        7z a axel.7z -r artifact/*
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: axel-binaries
+        path: |
+          artifact/*
+          axel.7z
+
+    - name: Create Release
+      if: success()
+      uses: ncipollo/release-action@v1
+      with:
+        tag: axel-ubuntu-latest
+        allowUpdates: true
+        artifacts: axel.7z
+        token: ${{ secrets.GITHUB_TOKEN }}
