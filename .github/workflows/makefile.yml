@@ -36,10 +36,14 @@ jobs:
           mingw-w64-x86_64-toolchain
           mingw-w64-x86_64-openssl
           mingw-w64-x86_64-winpthreads-git
+          mingw-w64-x86_64-headers
+          mingw-w64-x86_64-crt
         
     - name: Build axel
       shell: msys2 {0}
       run: |
+        export CPATH=/mingw64/include
+        export LIBRARY_PATH=/mingw64/lib
         wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
         tar -zxvf axel-2.17.14.tar.gz
         cd axel-2.17.14
