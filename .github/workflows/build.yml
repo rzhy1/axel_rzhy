@@ -33,7 +33,7 @@ jobs:
           wget \
           git \
           p7zip-full \
-          mingw-w64
+          musl-tools
         #wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.gz
         #tar -xzf autoconf-2.72.tar.gz
         #cd autoconf-2.72
