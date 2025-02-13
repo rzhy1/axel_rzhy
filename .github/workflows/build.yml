@@ -34,20 +34,20 @@ jobs:
           wget \
           git \
           p7zip-full
-        wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.gz
-        tar -xzf autoconf-2.72.tar.gz
-        cd autoconf-2.72
-        ./configure --prefix=/usr/local
-        make -j$(nproc)
-        sudo make install
-        cd ..
-        rm -rf autoconf-2.72*
+        #wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.gz
+        #tar -xzf autoconf-2.72.tar.gz
+        #cd autoconf-2.72
+        #./configure --prefix=/usr/local
+        #make -j$(nproc)
+        #sudo make install
+        #cd ..
+        #rm -rf autoconf-2.72*
 
     - name: Build axel
       run: |
-        git clone https://github.com/axel-download-accelerator/axel.git axel
-        cd axel
-        autoreconf -fvi
+        wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
+        tar -zxvf axel-2.17.14.tar.gz
+        cd axel-2.17.14
         ./configure \
           LDFLAGS="-static -Wl,--whole-archive -lpthread -ldl -Wl,--no-whole-archive" \
           LIBS="-static-libgcc -static-libstdc++ -lcrypto -lssl -lnss_files -lnss_dns -lresolv"
