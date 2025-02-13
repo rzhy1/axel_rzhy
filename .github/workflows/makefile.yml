@@ -38,12 +38,15 @@ jobs:
           mingw-w64-x86_64-winpthreads-git
           mingw-w64-x86_64-headers
           mingw-w64-x86_64-crt
+          mingw-w64-x86_64-openssl-static
+          mingw-w64-x86_64-winpthreads-static
         
     - name: Build axel
       shell: msys2 {0}
       run: |
         echo "查找"
-        find -type f -name inet.h
+        echo $MSYSTEM
+        find -type f -name "inet.h"
         echo "查找"
         export CPATH=/mingw64/include
         export LIBRARY_PATH=/mingw64/lib
