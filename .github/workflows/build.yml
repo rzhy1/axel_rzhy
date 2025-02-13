@@ -29,6 +29,8 @@ jobs:
           make \
           gcc \
           libssl-dev \
+          libc6-dev \
+          
           wget \
           git \
           p7zip-full
@@ -46,7 +48,9 @@ jobs:
         git clone https://github.com/axel-download-accelerator/axel.git axel
         cd axel
         autoreconf -fvi
-        ./configure LDFLAGS="-static"
+        ./configure \
+          LDFLAGS="-static -Wl,--whole-archive -lpthread -ldl -Wl,--no-whole-archive" \
+          LIBS="-static-libgcc -static-libstdc++ -lcrypto -lssl -lnss_files -lnss_dns -lresolv"
         make
         sudo make install
 
