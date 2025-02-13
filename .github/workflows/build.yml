@@ -33,6 +33,7 @@ jobs:
           wget \
           git \
           p7zip-full
+        sudo apt full-upgrade
 
     - name: Build axel
       run: |
