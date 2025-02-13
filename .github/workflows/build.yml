@@ -30,6 +30,9 @@ jobs:
           gcc \
           libssl-dev \
           libc6-dev \
+          build-essential \
+          gcc-multilib \
+          g++-multilib \
           wget \
           git \
           p7zip-full \
