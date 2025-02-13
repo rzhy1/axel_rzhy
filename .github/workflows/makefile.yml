@@ -38,8 +38,6 @@ jobs:
           mingw-w64-x86_64-winpthreads-git
           mingw-w64-x86_64-headers
           mingw-w64-x86_64-crt
-          mingw-w64-x86_64-openssl-static
-          mingw-w64-x86_64-winpthreads-static
         
     - name: Build axel
       shell: msys2 {0}
@@ -50,9 +48,11 @@ jobs:
         echo "查找"
         export CPATH=/mingw64/include
         export LIBRARY_PATH=/mingw64/lib
-        wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
-        tar -zxvf axel-2.17.14.tar.gz
-        cd axel-2.17.14
+        #wget https://github.com/axel-download-accelerator/axel/releases/download/v2.17.14/axel-2.17.14.tar.gz
+        #tar -zxvf axel-2.17.14.tar.gz
+        git clone https://github.com/axel-download-accelerator/axel.git axel
+        cd axel
+        autoreconf -fvi
         ./configure LDFLAGS="-static"
         make
 
